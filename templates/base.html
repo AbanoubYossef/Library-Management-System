@@ -54,11 +54,48 @@
 
 <!--<script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard3.js"></script>-->
 <script>
+    $(document).ready(function(){
+        var total = 0 ;
+        $(".total_price").each(function(){
+            $(this).hide()
+            var price= $(this).text()
+            total += parseInt(price)
+
+        });
+        $("#totalsalarys").text(total+$("#totalsalarys").text())
+    });
+
+    var total_rental=0
+    $(".toatal_rental_price").each(function(){
+        $(this).hide()
+        var salaryrental=$(this).text()
+        total_rental += parseInt(salaryrental)
+    });
+    $(".salary_rental").text(total_rental)
+    $(".salary_rental").hide()
+
+    var total_sold=0
+    $(".total_sold_price").each(function(){
+        $(this).hide()
+        var salarysold=$(this).text()
+        total_sold += parseInt(salarysold)
+    });
+    $(".salary_sold").text(total_sold)
+    $(".salary_sold").hide()
+
+
+    $("#rental_period").keyup(function(){
+        $("#Toatal_rental_price").val(
+            $("#rental_period").val() * $("#rental_price_per_day").val()
+        )
+    });
 
     $("#catinput").hide()
+
     $("#addcat").click(function(){
         $("#catinput").show()
     });
+
     $("#backcat").click(function(){
         $("#catinput").hide()
     });
@@ -66,7 +103,6 @@
 
 
     {%for book in books %}
-
         $(".cat{{book.category.id}}").click(function(){
             $(".bookhide").hide()
             $(".book{{book.category.id}}").show()
@@ -118,14 +154,15 @@
             backgroundColor: '#007bff',
             borderColor    : '#007bff',
             data           : [ 
-                '50',
+                $(".salary_sold").text( )
             ]
             },
             {
             backgroundColor: '#ced4da',
             borderColor    : '#ced4da',
             data           : [ 
-                    '30',
+                $(".salary_rental").text( )
+
             ]
             }
         ]
@@ -185,7 +222,7 @@
         type: 'pie',
         data: {
         datasets: [{
-            data: ['35','25','40'],
+            data: ['{{availble_book}}', '{{sold_book}}', '{{rental_book}}'],
             backgroundColor :["#27c100","#f3545d","#fdaf4b"],
             borderWidth: 10,
             

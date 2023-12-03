@@ -23,6 +23,7 @@ class BookForm(forms.ModelForm):
             'price',
             'rental_per_day_price',
             'rental_period',
+            'Toatal_rental',
             'status',
             'category',
         ]
@@ -33,9 +34,10 @@ class BookForm(forms.ModelForm):
             'photo_of_book': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'photo_of_author': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'pages_number': forms.NumberInput(attrs={'class': 'form-control'}),  # Use NumberInput for IntegerField
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),  # Use NumberInput for IntegerField
-            'rental_per_day_price': forms.NumberInput(attrs={'class': 'form-control'}),  # Use NumberInput for IntegerField
-            'rental_period': forms.NumberInput(attrs={'class': 'form-control'}),  # Use NumberInput for IntegerField
+            'price': forms.NumberInput(attrs={'class': 'form-control'}), 
+            'rental_per_day_price': forms.NumberInput(attrs={'class': 'form-control','id':'rental_price_per_day'}),  
+            'rental_period': forms.NumberInput(attrs={'class': 'form-control','id':'rental_period'}), 
+            'Toatal_rental': forms.NumberInput(attrs={'class': 'form-control','id':'Toatal_rental_price'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
         }

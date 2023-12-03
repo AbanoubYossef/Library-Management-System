@@ -26,7 +26,7 @@
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">500</span>
+                    <span class="text-bold text-lg">{{all_books}}</span>
                     <span>Total Number Of The Books</span>
                   </p>  
                 </div>
@@ -51,7 +51,23 @@
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
-                    <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                    {% for book in books%}
+
+                      {%if book.price != None %}
+                      {%if book.status == 'sold'%}
+                        <p class="total_price">{{book.price}}</p>
+                      {%endif%}  
+                      {%endif%}
+
+                      {%if  book.Toatal_rental != None%}
+                      {%if  book.status == 'rental'%}
+                        <p class =" total_price">{{book.Toatal_rental}}</p>
+                      {%endif%}  
+                      {%endif%}  
+
+                    {%endfor%}
+                    
+                    <span id="totalsalarys" class="text-bold text-lg">$</span><br></p>
                 </div>
                 <!-- /.d-flex -->
 
@@ -60,10 +76,33 @@
                 </div>
 
                 <div class="d-flex flex-row justify-content-end">
+                {% for book in books%}
+
+                  {%if book.price != None %}
+                  {%if book.status == 'sold'%}
+                    <p class="total_sold_price">{{book.price}}</p>
+                  {%endif%}  
+                  {%endif%} 
+
+                {%endfor%}
+              <p class="salary_sold"></p>
+
+
                   <span class="mr-2">
                     <i class="fas fa-square text-primary"></i> Benefits From Sold Books
                     <p id="soldtotals"></p>     
                   </span>
+                {% for book in books%}
+
+                  {%if  book.Toatal_rental != None%}
+                  {%if  book.status == 'rental'%}
+                    <p class =" toatal_rental_price">{{book.Toatal_rental}}</p>
+                  {%endif%}  
+                  {%endif%}  
+
+                {%endfor%}
+                  <p class =" salary_rental"></p>
+
                   <span>
                     <i class="fas fa-square text-gray"></i> Benefits Form Borrowed Books
                     <p id="rentedtotals"></p>
@@ -175,7 +214,7 @@
                         <h5 class="description-header">{{book.price}}$</h5>
                         <span class="description-text">Price</span>
                         {%elif book.rental_per_day_price%}
-                          <h5 class="description-header">{{book.rental_per_day_price}}</h5>
+                          <h5 class="description-header">{{book.rental_per_day_price}}$ Per Day</h5>
                           <span class="description-text">Price</span>
                         {%endif%}  
                       </div>

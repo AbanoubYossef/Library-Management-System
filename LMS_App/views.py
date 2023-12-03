@@ -19,15 +19,26 @@ def home(request):
         'books': Book.objects.all(),
         'add_book_form':BookForm(),
         'add_cat_form': CategoryForm(),
+        'all_books':Book.objects.filter(active=True).count(),
+        'sold_book':Book.objects.filter(status='sold').count(),
+        'rental_book':Book.objects.filter(status='rental').count(),
+        'availble_book':Book.objects.filter(status='availble').count(),
         
     }
     return render(request,'index.html',context)
 
 
 def books(request):
+    search = Book.objects.all()
+    title =None
+    if 'search_name' in request.GET:
+        title = request.GET['search_name']
+        if title:
+            search = search.filter(title__icontains=title)
     context={
         'categories':Category.objects.all(),
-        'books': Book.objects.all(),
+        'books': search,
+        'add_cat_form': CategoryForm(), 
         
     }
     return render(request,'books.html',context)   
